@@ -95,6 +95,39 @@ Bedrock은 외부 관리형 AI 서비스이며 자체 학습 모델로 표현하
 AWS 리전: ap-south-1 (Mumbai, global 교차 리전 추론 프로필)
 자격증명·서버 개인키는 코드·발표·영상·제출 문서에 포함하지 않습니다.
 
+Supabase JavaScript SDK 및 Supabase 서비스
+역할: 기존 로그인·회원가입·비밀번호 재설정, 회사 작업공간 및 공정 의뢰 프로토타입.
+사용 파일: web/supabase-client.js, auth.js, signup.js, reset-password.js, workspace.js, process.js, app.js.
+이번 studio.html의 설비 진단·CSV 분석·Bedrock AI 경로에는 Supabase SDK를 사용하지 않습니다.
+브라우저가 https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm 에서 동적으로 로드합니다.
+현재 표기는 주 버전 2이며 세부 버전과 CDN 산출물 해시는 고정하지 않았습니다.
+SDK 라이선스: MIT. Supabase 관리형 서비스의 이용 조건은 SDK 라이선스와 별개입니다.
+공식 소스: https://github.com/supabase/supabase-js
+공식 라이선스: https://github.com/supabase/supabase-js/blob/master/LICENSE
+공개 설정에는 publishable key가 있으며 service_role·서버 비밀키를 포함하지 않습니다.
+
+boto3 (AWS SDK for Python)
+역할: Python 서버에서 EC2 인스턴스 역할 자격증명으로 Bedrock Converse API 호출.
+직접 의존성: server/requirements.txt의 boto3==1.44.1.
+라이선스: Apache License 2.0.
+공식 배포: https://pypi.org/project/boto3/1.44.1/
+공식 소스: https://github.com/boto/boto3
+공식 라이선스: https://github.com/boto/boto3/blob/develop/LICENSE
+SDK 및 간접 의존성 바이너리는 소스 ZIP에 넣지 않았으며 pip로 설치합니다.
+이 문서는 주요 직접 의존성 기록이며, 설치 환경 전체의 잠금 파일이나 완전한 SBOM은 아닙니다.
+
+실행 환경: Node.js, Python, NGINX Open Source
+Node.js 22 이상: 로컬 미리보기·게이트웨이와 JavaScript 테스트를 실행합니다.
+Node.js 핵심 라이선스는 MIT이며 포함된 제3자 구성요소의 고지는 공식 LICENSE를 따릅니다.
+https://github.com/nodejs/node/blob/main/LICENSE
+Python 3.12: AI HTTP 서버와 테스트 실행 환경. Python 표준 라이브러리를 사용합니다.
+Python Software Foundation License Version 2 및 포함된 구성요소별 고지:
+https://docs.python.org/3.12/license.html
+NGINX Open Source: 공개 EC2의 정적 파일 제공과 로컬 AI API 프록시.
+라이선스: simplified 2-clause BSD-like license. 공식 원문: https://nginx.org/LICENSE
+이 실행 환경 바이너리는 소스 ZIP에 포함하지 않았습니다. 배포 설정과 설치 절차는 server/README.md에 있습니다.
+위 라이선스 링크는 2026.11.12 재검토에서 공식 저장소·공식 문서로 확인했습니다.
+
 3. 공개 공장 자료와 UI 참고
 
 현진정공 공식 공정 소개

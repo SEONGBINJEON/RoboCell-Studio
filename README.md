@@ -24,6 +24,8 @@ python -m unittest discover -s server -p 'test_*.py' -v
 
 AI 서버 실행과 Nginx 배포는 [server/README.md](server/README.md)를 참고하세요. EC2 인스턴스 IAM 역할을 사용합니다. 저장소에는 AWS 키나 SSH 개인키가 없습니다. 로컬 AI 게이트웨이는 `AI_BASE_URL` 환경변수로 운영자가 고정 주소를 설정합니다. 로컬 Isaac 게이트웨이는 `ISAAC_BASE_URL`로 설정하며 공개 서버는 GPU 제어를 제공하지 않습니다.
 
+이 저장소와 제출 ZIP은 웹, AWS AI API, 테스트를 포함합니다. 5090의 Isaac Sim 실행 서버 코드, USD·로봇 자산, GPU 실행 환경은 별도 외부 런타임이며 포함하지 않습니다. `npm run dev`는 웹 편집·CSV 진단을 재현하며 물리 시뮬레이션 전체를 독립 실행하지 않습니다. 실제 보관 영상과 실행 검증 범위는 아래 설명과 출처 문서에서 확인할 수 있습니다.
+
 ## 구현 범위
 
 - Three.js 3D 배치, 정밀 위치/회전, 네 가지 공장 예시, 배치 저장/비교, 입력 근거 관리
@@ -48,3 +50,5 @@ AI 서버 실행과 Nginx 배포는 [server/README.md](server/README.md)를 참�
 ## 오픈소스 및 AI 활용
 
 Three.js/OrbitControls(MIT), IBM Plex Sans KR 및 비교용 글꼴(OFL)의 고지는 `web/vendor/three/LICENSE`와 `web/assets/fonts/`에 보존했습니다. AI 개발 보조는 OpenAI Codex, 제품의 생성형 AI는 Amazon Bedrock의 Claude Haiku 4.5입니다. 자체 학습 고장 예측 모델 또는 자체 물리 엔진으로 표시하지 않습니다. NVIDIA Isaac Sim과 제공 로봇 자산은 NVIDIA 및 해당 자산의 라이선스를 따릅니다. 상세 내역은 `SOURCES_OSS_AI.txt`를 참고하세요.
+
+기존 계정 화면은 Supabase JavaScript SDK(MIT), AWS AI API는 boto3(Apache-2.0)를 사용합니다. 제품 전체에 새 오픈소스 라이선스를 부여한 것은 아니며, 각 외부 구성요소의 사용 조건은 별도로 보존합니다. 기존 웹 및 Isaac 고정 셀 실행 기반을 사용했고, 이번 제출에는 편집기 UI·입력 근거·CSV 진단·Bedrock API·보고서와 공개 EC2 배포를 보완했습니다. 외부 도구와 기존 코드를 모두 자체 신규 개발한 것으로 표현하지 않습니다.

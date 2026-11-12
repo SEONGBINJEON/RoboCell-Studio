@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111310">
+  <meta name="description" content="RoboCell Studio 기업 작업 공간">
+  <title>작업 공간 — RoboCell Studio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <script src="supabase-config.js"></script>
+  <script type="module" src="workspace.js"></script>
+  <link rel="stylesheet" href="typography.css">
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#workspace-title">작업 공간으로 이동</a>
+  <main class="auth-shell">
+    <section class="auth-intro" aria-labelledby="workspace-intro-title">
+      <a class="auth-wordmark" href="index.html" aria-label="RoboCell Studio 홈"><img class="brand-logo-mark" src="assets/robocell-logo-mark-black-yellow.png" alt="" aria-hidden="true"><span class="brand-name">Robo<span class="brand-cell">Cell</span><span class="brand-studio">Studio</span></span></a>
+      <div class="auth-intro-copy">
+        <p class="eyebrow"><span class="square"></span> YOUR PROCESS, YOUR SPACE</p>
+        <h1 id="workspace-intro-title">공정의 다음 판단을<br><span>준비하고 있어요.</span></h1>
+        <p>조건을 정리하고, 여러 개선안을 비교할<br>기업별 작업 공간이 곧 이어집니다.</p>
+      </div>
+      <div class="auth-process-card" aria-label="예정된 이용 흐름">
+        <span class="mini-label">NEXT STEPS</span>
+        <ol><li><b>01</b><span>공정 조건 등록</span></li><li><b>02</b><span>시뮬레이션 진행</span></li><li><b>03</b><span>결과 비교</span></li></ol>
+      </div>
+    </section>
+    <section class="auth-panel" aria-labelledby="workspace-title">
+      <a class="auth-back" href="index.html"><span aria-hidden="true">←</span> 서비스 소개로 돌아가기</a>
+      <div class="auth-form-wrap">
+        <p class="eyebrow dark">COMPANY WORKSPACE</p>
+        <h2 id="workspace-title">작업 공간 확인 중</h2>
+        <p id="workspace-lead" class="auth-lead">로그인한 계정과 기업 정보를 확인하고 있습니다.</p>
+        <p id="workspace-status" class="auth-status" role="status">잠시만 기다려 주세요.</p>
+        <div class="auth-divider"><span>다음 단계</span></div>
+        <div class="auth-signup" aria-label="다음 구현 예정 기능"><span>공정 조건 등록 화면</span><span aria-hidden="true">↗</span></div>
+        <p class="auth-help">공정 조건 등록과 요청 상태 확인 기능은 다음 구현 단계에서 연결됩니다.</p>
+        <button id="signout-button" class="auth-text-button auth-signout" type="button">로그아웃</button>
+      </div>
+      <p class="auth-footer">© 2026 RoboCell Studio <span>·</span> 경북 중소 제조기업을 위한 공정 설계 플랫폼</p>
+    </section>
+  </main>
+</body>
+</html>

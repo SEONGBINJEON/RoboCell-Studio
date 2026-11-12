@@ -1,0 +1,63 @@
+/* IBM Plex Sans KR: official, unmodified WOFF2. See assets/fonts/ibm-plex-sans-kr/LICENSE.txt. */
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  src: url("assets/fonts/ibm-plex-sans-kr/IBMPlexSansKR-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  src: url("assets/fonts/ibm-plex-sans-kr/IBMPlexSansKR-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  src: url("assets/fonts/ibm-plex-sans-kr/IBMPlexSansKR-SemiBold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* Load last. Page-level tokens also replace the previous body-scoped font stack. */
+:root,
+body.home-page,
+body.engineering-workspace {
+  --font: "IBM Plex Sans KR", Pretendard, "Malgun Gothic", "Segoe UI", sans-serif;
+  --studio-font: var(--font);
+  --font-mono: "Cascadia Code", Consolas, ui-monospace, monospace;
+  --type-body: 14px;
+  --type-label: 13px;
+  --type-note: 12px;
+}
+body {
+  font-family: var(--font);
+  font-size: var(--type-body);
+  font-weight: 400;
+  font-synthesis: none;
+  font-kerning: normal;
+}
+button, input, select, textarea { font-family: inherit; }
+body.engineering-workspace *,
+body.home-page * { font-family: var(--font) !important; }
+body.engineering-workspace :is(pre, pre code, kbd),
+body.home-page :is(pre, pre code, kbd) { font-family: var(--font-mono) !important; }
+body :is(input[type="number"], output, time, td, .numeric, .coordinate, .run-metrics, .layout-metrics) {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Readable working text; compact status annotations keep their component sizes. */
+body.engineering-workspace :is(.field-label, .two-fields label, .inspector-panel .field-label,
+  .panel-heading h2, .inspector-heading h2, .object-list-heading h3,
+  .asset-tile strong, .object-list button, .library-tabs button) {
+  font-size: var(--type-label);
+}
+body.engineering-workspace :is(.asset-tile small, .inspector-help, .field-note) {
+  font-size: var(--type-note);
+}
+body.engineering-workspace :is(.field-label input, .two-fields input,
+  .inspector-panel .field-label input, .inspector-panel .two-fields input) {
+  font-size: var(--type-body);
+}

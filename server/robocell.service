@@ -1,0 +1,25 @@
+[Unit]
+Description=RoboCell grounded Bedrock API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/robocell
+EnvironmentFile=/home/ubuntu/robocell/server/robocell.env
+ExecStart=/home/ubuntu/robocell/.venv/bin/python /home/ubuntu/robocell/server/app.py
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/ubuntu/robocell/data
+RestrictSUIDSGID=true
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111310">
+  <meta name="description" content="RoboCell Studio 공정 조건 등록 화면">
+  <title>공정 조건 등록 — RoboCell Studio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="process.css">
+  <script src="supabase-config.js"></script>
+  <script type="module" src="process.js"></script>
+  <link rel="stylesheet" href="typography.css">
+</head>
+<body class="auth-page process-page">
+  <a class="skip-link" href="#process-title">공정 조건 입력으로 이동</a>
+  <main class="auth-shell">
+    <section class="auth-intro" aria-labelledby="process-intro-title">
+      <a class="auth-wordmark" href="index.html" aria-label="RoboCell Studio 홈"><img class="brand-logo-mark" src="assets/robocell-logo-mark-black-yellow.png" alt="" aria-hidden="true"><span class="brand-name">Robo<span class="brand-cell">Cell</span><span class="brand-studio">Studio</span></span></a>
+      <div class="auth-intro-copy">
+        <p class="eyebrow"><span class="square"></span> START WITH YOUR PROCESS</p>
+        <h1 id="process-intro-title">우리 공정의<br><span>첫 조건</span>부터<br>정리해 보세요.</h1>
+        <p>현장을 멈추지 않고 검토할 수 있도록,<br>지금 알고 있는 정보부터 기록합니다.</p>
+      </div>
+      <div class="auth-process-card" aria-label="공정 조건 등록 다음 흐름">
+        <span class="mini-label">WHAT HAPPENS NEXT</span>
+        <ol><li><b>01</b><span>공정 조건 등록</span></li><li><b>02</b><span>분석 요청 접수</span></li><li><b>03</b><span>Isaac Sim 실행 대기</span></li></ol>
+      </div>
+      <p class="auth-image-caption">가상 로봇 셀 · 콘셉트 이미지</p>
+    </section>
+
+    <section class="auth-panel" aria-labelledby="process-title">
+      <a class="auth-back" href="index.html"><span aria-hidden="true">←</span> 서비스 소개로 돌아가기</a>
+      <div class="auth-form-wrap auth-form-wrap--process">
+        <p class="eyebrow dark">PROCESS REGISTRATION</p>
+        <h2 id="process-title">공정 조건 등록</h2>
+        <p class="auth-lead">전부 알고 있을 필요는 없습니다.<br>지금 정리 가능한 정보부터 초안으로 남겨 보세요.</p>
+        <p id="process-account-context" class="process-account-context" aria-live="polite">로그인하면 기업별 분석 요청으로 저장할 수 있습니다.</p>
+        <form id="process-start-form" novalidate>
+          <label for="process-name">공정 이름</label>
+          <input id="process-name" name="processName" type="text" maxlength="80" autocomplete="off" placeholder="예: 금속 부품 이송 공정" required aria-describedby="process-status">
+          <label for="process-product">제품 또는 부품 <span class="optional">선택</span></label>
+          <input id="process-product" name="productName" type="text" maxlength="80" autocomplete="off" placeholder="예: 알루미늄 하우징" aria-describedby="process-status">
+          <div class="process-grid">
+            <label for="process-target">목표 생산량 <span class="optional">개/시간</span><input id="process-target" name="target" type="number" min="1" max="100000" step="1" placeholder="예: 100" required aria-describedby="process-status"></label>
+            <label for="process-hours">하루 작업시간 <span class="optional">시간</span><input id="process-hours" name="hours" type="number" min="0.5" max="24" step="0.5" placeholder="예: 8" required aria-describedby="process-status"></label>
+          </div>
+          <label for="process-goal">가장 개선하고 싶은 부분</label>
+          <select id="process-goal" name="goal" aria-describedby="process-status"><option value="waiting">공정 사이의 대기시간</option><option value="production">시간당 생산량</option><option value="energy">제품당 에너지 사용량</option><option value="automation">로봇 자동화 도입 검토</option></select>
+          <label for="process-description">공정 설명 <span class="optional">선택</span></label>
+          <textarea id="process-description" name="description" rows="3" maxlength="2000" placeholder="작업 순서, 이송거리, 현재 불편한 점 등 알고 있는 내용을 적어 주세요." aria-describedby="process-status"></textarea>
+          <button id="process-submit" class="auth-submit" type="submit">공정 초안 저장하기 <span aria-hidden="true">↓</span></button>
+          <p id="process-status" class="auth-status" role="status">로그인하면 입력한 조건을 기업별 분석 요청으로 저장할 수 있습니다.</p>
+          <div class="auth-divider"><span>공간과 설비를 직접 배치하기</span></div>
+          <button id="process-open-studio" class="auth-signup" type="button" aria-describedby="process-studio-help">3D 배치 설계로 이어가기 <span aria-hidden="true">↗</span></button>
+          <p id="process-studio-help" class="auth-help">입력한 공정 이름과 목표를 이어서 사용합니다. 이 버튼은 분석 요청을 등록하거나 시뮬레이션을 실행하지 않습니다.</p>
+        </form>
+        <section id="process-requests" class="process-requests" aria-labelledby="process-requests-title" hidden>
+          <div class="process-requests-heading"><div><p class="mini-label">YOUR REQUESTS</p><h3 id="process-requests-title">내 분석 요청</h3></div><button id="refresh-requests" class="process-refresh" type="button">새로고침</button></div>
+          <p id="process-requests-status" class="process-requests-status" role="status">등록한 요청을 불러오는 중입니다.</p>
+          <ul id="process-request-list" class="process-request-list"></ul>
+        </section>
+        <div id="process-login-note" class="process-login-note"><span>계정이 있으신가요?</span><a id="process-login-link" href="login.html">Login <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <p class="auth-footer">© 2026 RoboCell Studio <span>·</span> 경북 중소 제조기업을 위한 공정 설계 플랫폼</p>
+    </section>
+  </main>
+</body>
+</html>

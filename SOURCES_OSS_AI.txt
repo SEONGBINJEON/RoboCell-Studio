@@ -1,0 +1,164 @@
+RoboCell Studio - 출처, 오픈소스, AI 활용 기록
+팀 RoboCell Studio / 작성 기준 2026-11-12 16:19 KST
+팀 제공 발표자료16장을 기반으로 보완했습니다.
+
+확인된 팀 역할
+전성빈: PM·기획
+박종진: AI 모델 구현·연동
+나유빈: 프론트엔드·백엔드
+허성찬: UI/UX
+권보경: 자료조사·디자인·발표자료 제작
+
+1. 발표자료의 자체 근거
+
+팀 원본 발표자료
+동북권 오픈소스 경진대회.pptx (16장, 팀 제공)
+원본의 표지 그래픽, 노랑·회색 디자인, 기사 캡처와 팀원 사진을 유지했습니다.
+원본 표지 그래픽의 외부 제작 출처는 별도로 제공되지 않았으며 실제 현장 사진이나
+자체 Isaac 실행 화면으로 설명하지 않습니다.
+
+추가한 실제 Isaac Sim 사진
+web/assets/isaac/robot.jpg, overview.jpg, birdseye.jpg
+2026.11.08 실제 실행 run20261108_212719_2f2a.
+outputs/5090-live-retest/resumed-2.jpg
+2026.11.12 run20261112_072354_5d03 보관 실행 프레임.
+현재19개 자유 설비 배치를 그대로 실행한 결과가 아니며 촬영일을 화면에 표시했습니다.
+
+추가한 실제 웹 UI
+outputs/submission/screens/editor.png, diagnostics-chart.png, assistant.png, report.png
+공장 크기·치수·배치는 합성 예시이며 실측 공장 CAD가 아닙니다.
+진단 CSV 예제도 합성 데이터입니다.
+
+실제 실행 수치
+run_id 20261112_102020_3607
+measurement_s=176.85, completed_units=2, grasp_ok=7,
+ik_timeouts=1, collisions_logged=43.
+원시 접촉은 robot_vs_environment=50, robot_finger_vs_carrier=117로 별도 집계.
+허용 파지 접촉과 환경 간섭의 판정 없이 모두 위험 충돌로 해석하지 않습니다.
+원본 summary SHA-256:
+69bb15624f692ada4b7b13b01d457dfc1f2758a0ae5a20509e18164cce15e65d
+로컬 사본: work/submission-deck/evidence/historical-run-summary.json
+원본 조회 기록: outputs/claude-handoff/REMOTE_AUDIT.txt
+
+AI 및 진단 상태
+2026.11.12 16:19 KST 공개 EC2 웹과 실제 Bedrock API 응답을 확인했습니다.
+배포 URL: http://13.207.111.2/studio.html
+HTTP200, mode=llm, 유효 근거 인용5개. 검증 기록: outputs/competition-backend/PUBLIC_VERIFICATION.json
+CSV 업로드와 임계값·기준 대비 변화 분석을 구현했습니다.
+합성 CSV를 사용하는 시연은 화면과 설명에 합성 예시임을 표시합니다.
+현장 고장 데이터의 정답 라벨, 정확도, 재현율, 오탐률은 아직 검증하지 않았습니다.
+
+2. 구현에 사용한 주요 컴포넌트
+
+Three.js r180 및 OrbitControls
+역할: 브라우저 3D 장면과 카메라 제어.
+라이선스: MIT.
+공식 소스: https://github.com/mrdoob/three.js/tree/r180
+공식 라이선스: https://github.com/mrdoob/three.js/blob/r180/LICENSE
+프로젝트 내 고지: web/vendor/three/LICENSE
+
+IBM Plex Sans KR
+역할: 제품 UI의 한글·영문 글꼴. 초기 발표 초안에도 사용했으나 최종 팀 발표자료는 원본 글꼴을 유지합니다.
+공식 원본의 Regular / Medium / SemiBold를 사용합니다.
+라이선스: SIL Open Font License 1.1. 글꼴 원본은 변경하지 않았습니다.
+공식 소스: https://github.com/IBM/plex/tree/master/packages/plex-sans-kr
+고정 커밋: 48e8676114c04f29033b4b53da4ec579f8846297
+공식 라이선스: https://github.com/IBM/plex/blob/master/packages/plex-sans-kr/LICENSE.txt
+프로젝트 내 고지: web/assets/fonts/ibm-plex-sans-kr/LICENSE.txt
+폰트별 URL·해시: outputs/product-review/FONT_DECISION.txt
+
+Pretendard, SUIT, Wanted Sans, Plus Jakarta Sans
+역할: 기존 UI 글꼴 또는 글꼴 비교 화면. 최종 기본 UI는 IBM Plex Sans KR.
+라이선스: 각 공식 배포물에 포함된 SIL Open Font License.
+Pretendard: https://github.com/orioncactus/pretendard
+SUIT: https://github.com/sun-typeface/SUIT
+Wanted Sans: https://github.com/wanteddev/wanted-sans
+Plus Jakarta Sans: https://github.com/tokotype/PlusJakartaSans
+각 원문 라이선스는 web/assets/fonts에 보존되어 있습니다.
+
+NVIDIA Isaac Sim 및 제공 로봇 자산
+역할: 원격 GPU에서 물리 시뮬레이션, 관절 동작, 접촉·상태 기록과 영상 생성.
+실행 기록의 로봇: NVIDIA 공식 Isaac 자산 UR10e + Robotiq 2F-140.
+공개 Isaac Sim 코드와 추가 구성요소·3D 자산의 조건은 구분됩니다.
+공식 라이선스 안내:
+https://docs.isaacsim.omniverse.nvidia.com/6.0.1/common/licenses-isaac-sim.html
+공식 소스: https://github.com/isaac-sim/IsaacSim
+추가 구성요소·자산 조건:
+https://www.nvidia.com/en-us/agreements/enterprise-software/isaac-sim-additional-software-and-materials-license/
+추가한 Isaac 화면의 NVIDIA 자산을 자체 제작 로봇 모델로 주장하지 않습니다.
+
+Amazon Bedrock / AWS EC2
+역할: 서버의 AI 추론 요청과 웹 서비스 실행 환경.
+Bedrock은 외부 관리형 AI 서비스이며 자체 학습 모델로 표현하지 않습니다.
+공식 문서: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+실제 호출로 확인한 모델 ID: global.anthropic.claude-haiku-4-5-20251001-v1:0
+AWS 리전: ap-south-1 (Mumbai, global 교차 리전 추론 프로필)
+자격증명·서버 개인키는 코드·발표·영상·제출 문서에 포함하지 않습니다.
+
+3. 공개 공장 자료와 UI 참고
+
+현진정공 공식 공정 소개
+https://hyunjin-cnc.com/ko/system.html
+CNC, 세척, 후처리, 치수·외관 검사 등의 공정 역할을 참고했습니다.
+42×20m 대표 구역, 설비 좌표, 크기, 시간 등은 별도의 가정값입니다.
+실제 현장 CAD나 생산 데이터를 확보한 것으로 표현하지 않습니다.
+
+산업용 UI 구조 참고
+Autodesk Fusion: https://help.autodesk.com/view/fusion360/ENU/?guid=GS-THE-FUSION-INTERFACE
+Siemens Process Simulate:
+https://blogs.sw.siemens.com/tecnomatix/discover-whats-new-in-tecnomatix-2402-february-2024/
+NVIDIA Isaac Sim UI:
+https://docs.isaacsim.omniverse.nvidia.com/6.0.1/gui/reference_user_interface.html
+장면 트리·속성 패널·뷰포트 작업 구조를 참고했고 제품 로고와 실제 화면을
+RoboCell 기능인 것처럼 발표자료에 넣지 않았습니다.
+
+4. 생성형 AI 활용 내역
+
+개발 보조
+OpenAI Codex를 코드 검토·구현·테스트 작성/실행·공식 자료 조사·UI 검토·
+발표 초안과 파일 생성에 사용했습니다. 생성된 코드와 문서는 실행, 테스트,
+브라우저 화면, 실제 로그를 대조해 검토했습니다.
+
+제품 기능
+Amazon Bedrock을 근거 기반 진단 보조에 연결합니다. 실행 요약과 이상징후,
+입력의 가정을 문맥으로 전달하고 관측 사실·원인 후보·확인 절차를 구분합니다.
+AI 응답은 안전 인증, 고장 원인의 확정, 설비 자동 제어 명령이 아닙니다.
+
+시각 자료
+최종 발표는 팀 원본16장에 자체 UI 캡처와 실제 Isaac Sim 보관 프레임을 추가했습니다.
+생성형 이미지나 합성 장면을 실제 제조 현장 사진으로 제시하지 않았습니다.
+공장 예시는 합성 또는 공개 공정 참고 재구성임을 표시합니다.
+
+발표자료 생성 도구
+OpenAI Artifact Tool로 팀 원본 PPTX를 불러와 텍스트와 이미지를 편집했습니다.
+PDF는 동일한 슬라이드 렌더를 사용해 원본 배치와 글꼴 외관을 보존했습니다.
+PPTX의 본문은 편집 가능하고 PDF는 발표용 고해상도 이미지 페이지입니다.
+출처와 해석 한계는 발표자 노트와 이 문서에 보존합니다.
+
+5. 검증 범위
+
+확인: UI 편집, 저장·실행 근거 관리, 실제 Isaac 실행과 제어, 원본 결과 기록.
+공개 검증: EC2 정적 웹, Bedrock 실제 응답, 근거 인용, 공개 GPU 제어 차단.
+확장 과제: 19개 자유 설비의 일반 실행 어댑터, 현장 센서·고장 라벨 데이터,
+탐지 품질과 오탐 평가, 제조사 조건에 따른 동적 안전 검증.
+실행 종료 코드 0과 화면 재생만으로 전체 물리·안전 검증 통과를 선언하지 않습니다.
+
+6. 팀 원본 추가 출처 및 글꼴
+
+원본 기사 자료: 위키트리2023.11, 세계일보2026.4.27,
+경북매일2026.9.16, SBS Biz2026.11 기사 캡처를 팀이 제공했습니다.
+기사 원본의 사망자 수 제목26명/본문24명 충돌은 확정 수치로 반복하지 않았습니다.
+로봇 밀도2022년 한국1,012대/세계평균151대는 다음 공개자료로 보강했습니다.
+https://ifr.org/img/worldrobotics/Foreword_WR_Industrial_Robots_2023.pdf
+https://www.nabo.go.kr/board/file/down.do?fid=33318305
+
+NEXON Lv2 Gothic: 팀 PPTX에 포함된 원본 글꼴을 유지했습니다.
+공식 안내: https://peak.nexon.com/en/post/964
+공식 글꼴 페이지: https://brand.nexon.com
+Pretendard: 원본 발표자료와 추가 텍스트에 사용, SIL OFL1.1.
+NEXON 글꼴의 조건을 SIL OFL로 일괄 표시하지 않습니다.
+
+추가 공개 검증(2026.11.12 16:25:11 KST): assist/report 실제응답HTTP200, 서버15테스트통과.
+검증기록: outputs/competition-backend/PUBLIC_FOLLOWUP_PROOF.json
+AI의 명칭·인용검사는 모든 수치의 사실성을 보장하지 않습니다.
+정확한 정량값은 결정적 CSV 진단표와 원본 로그를 기준으로 확인합니다.

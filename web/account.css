@@ -1,0 +1,7 @@
+.header-login.is-signed-in {
+  max-width: 168px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #625900;
+}

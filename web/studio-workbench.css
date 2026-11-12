@@ -1,0 +1,15 @@
+/* Load after studio-product.css. Narrow-screen layout remains owned by it. */
+.editor-grid > .workbench-separator{display:none}
+.workbench-resize-instructions{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;pointer-events:none}
+@media(min-width:1001px){
+  .editor-grid.workbench-resizable.workbench-resize-active{grid-template-columns:var(--workbench-left-width,204px) 6px minmax(0,1fr) 6px var(--workbench-right-width,228px);gap:0}
+  .editor-grid.workbench-resize-active > .workbench-separator{display:block;position:relative;align-self:stretch;min-width:0;min-height:0;cursor:col-resize;touch-action:none;background:#cdd1d6;outline:none;z-index:2;user-select:none}
+  .workbench-separator::after{content:'';position:absolute;top:50%;left:2px;width:2px;height:28px;transform:translateY(-50%);border-radius:1px;background:#969fa9}
+  .editor-grid.workbench-resize-active > .workbench-separator:hover,.editor-grid.workbench-resize-active > .workbench-separator.is-dragging{background:#aebac7}
+  .editor-grid.workbench-resize-active > .workbench-separator:focus-visible{background:#9daebf;box-shadow:inset 0 0 0 1px #51677e;outline:2px solid #526b84;outline-offset:-1px}
+  .focus-mode .editor-grid.workbench-resizable{grid-template-columns:minmax(0,1fr)}
+  .focus-mode .editor-grid > .workbench-separator{display:none}
+}
+body.workbench-resizing,body.workbench-resizing *{cursor:col-resize!important;user-select:none!important}
+body.workbench-resizing iframe{pointer-events:none}
+@media print{.editor-grid > .workbench-separator{display:none!important}}

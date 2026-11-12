@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111310">
+  <meta name="description" content="RoboCell Studio 로그인 화면 디자인 시안">
+  <title>Login — RoboCell Studio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <script src="supabase-config.js"></script>
+  <script type="module" src="auth.js"></script>
+  <link rel="stylesheet" href="typography.css">
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#login-title">Login으로 이동</a>
+  <main class="auth-shell">
+    <section class="auth-intro" aria-labelledby="auth-intro-title">
+      <a class="auth-wordmark" href="index.html" aria-label="RoboCell Studio 홈"><img class="brand-logo-mark" src="assets/robocell-logo-mark-black-yellow.png" alt="" aria-hidden="true"><span class="brand-name">Robo<span class="brand-cell">Cell</span><span class="brand-studio">Studio</span></span></a>
+      <div class="auth-intro-copy">
+        <p class="eyebrow"><span class="square"></span> YOUR PROCESS, YOUR SPACE</p>
+        <h1 id="auth-intro-title">우리 공정의<br><span>다음 판단</span>을<br>시작하세요.</h1>
+        <p>공정 조건부터 시나리오 비교와 결과 보고서까지,<br>기업별 작업 공간에서 이어집니다.</p>
+      </div>
+      <div class="auth-process-card" aria-label="로그인 후 이용 흐름">
+        <span class="mini-label">AFTER SIGNING IN</span>
+        <ol><li><b>01</b><span>공정 조건 등록</span></li><li><b>02</b><span>진행 상태 확인</span></li><li><b>03</b><span>결과와 보고서 비교</span></li></ol>
+      </div>
+      <p class="auth-image-caption">가상 로봇 셀 · 콘셉트 이미지</p>
+    </section>
+
+    <section class="auth-panel" aria-labelledby="login-title">
+      <a class="auth-back" href="index.html"><span aria-hidden="true">←</span> 서비스 소개로 돌아가기</a>
+      <div class="auth-form-wrap">
+        <p class="eyebrow dark">WELCOME BACK</p>
+        <h2 id="login-title">Login</h2>
+        <p class="auth-lead">등록한 이메일로 로그인해<br>우리 기업의 공정 검토를 이어가세요.</p>
+        <form id="login-form" novalidate>
+          <label for="login-email">이메일 주소</label>
+          <input id="login-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" required aria-describedby="login-status">
+          <label for="login-password">비밀번호</label>
+          <div class="password-row"><input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="비밀번호를 입력하세요" minlength="8" required aria-describedby="login-status"><button type="button" id="password-toggle" class="password-toggle" aria-label="비밀번호 표시" aria-pressed="false">표시</button></div>
+          <div class="auth-options"><label class="remember"><input name="remember" type="checkbox"> <span>로그인 유지</span></label><button class="auth-text-button" id="forgot-password" type="button">비밀번호를 잊으셨나요?</button></div>
+          <button class="auth-submit" type="submit">Login <span aria-hidden="true">↗</span></button>
+          <p id="login-status" class="auth-status" role="status">업무용 이메일과 비밀번호로 로그인합니다.</p>
+        </form>
+        <div class="auth-divider"><span>처음 이용하시나요?</span></div>
+        <a class="auth-signup" href="signup.html">기업 계정 만들기 <span aria-hidden="true">↗</span></a>
+        <p class="auth-help">운영자도 초대받은 이메일로 로그인합니다. 권한에 따라 보이는 메뉴가 달라집니다.</p>
+      </div>
+      <p class="auth-footer">© 2026 RoboCell Studio <span>·</span> 경북 중소 제조기업을 위한 공정 설계 플랫폼</p>
+    </section>
+  </main>
+</body>
+</html>
